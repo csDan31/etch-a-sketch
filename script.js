@@ -36,20 +36,46 @@ for(let i = 0; i<(grid*grid) ; i++) {
     }}
 
 function etch(){
-    this.style.backgroundColor = 'black';
+    this.style.backgroundColor = 'rgb(0,0,0)';
 }
-    
+
+/* black opacity
+function etch(){
+    let opacity = 0.1;
+    this.style.backgroundColor = `rgba(0,0,0,${opacity})`;
+}
+*/
+
+// black btn
+
+let blackBtn = document.getElementById('default-color');
+
+blackBtn.addEventListener('click',etchDefault);
+function etchDefault(){
+    document.querySelectorAll('.etch').forEach((item) => {
+        item.addEventListener('mouseover', etch)
+    })
+};
+
+// randomized color button
+
+function randomColors(){
+    let red = Math.floor(Math.random()*256);
+    let blue = Math.floor(Math.random()*256);
+    let green = Math.floor(Math.random()*256);
+    this.style.backgroundColor = `rgb(${red},${blue},${green})`;
+}
+
+let randomBtn = document.getElementById('random-color');
+
+randomBtn.addEventListener('click',etchRand);
+function etchRand(){
+    document.querySelectorAll('.etch').forEach((item) => {
+        item.addEventListener('mouseover', randomColors)
+    })
+};
 
 makeBoard();
-// mouseover changes the background to black
-/*let squares = document.querySelectorAll('.etch');
-
-squares.forEach((square) => {
-    square.addEventListener('mouseover', etch);
-})
-function etch(){
-    this.style.backgroundColor = 'black';
-}*/
 
 // set board size
 let boardSize = document.getElementById('board-size');
