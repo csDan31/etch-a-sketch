@@ -28,23 +28,23 @@ for(let i = 0; i<(grid*grid) ; i++) {
     square.style.outlineWidth = 'thin';
     square.setAttribute('class','etch');
 
-    let squares = document.querySelectorAll('.etch');
+    /*let squares = document.querySelectorAll('.etch');
 
     squares.forEach((square) => {
     square.addEventListener('mouseover', etch);
     })
-    }}
+    }*/}
+
+let squares = document.querySelectorAll('.etch');
+
+squares.forEach((square) => {
+    square.addEventListener('mouseover', etch);
+    })
+    }
 
 function etch(){
     this.style.backgroundColor = 'rgb(0,0,0)';
 }
-
-/* black opacity
-function etch(){
-    let opacity = 0.1;
-    this.style.backgroundColor = `rgba(0,0,0,${opacity})`;
-}
-*/
 
 // black btn
 
@@ -53,8 +53,28 @@ let blackBtn = document.getElementById('default-color');
 blackBtn.addEventListener('click',etchDefault);
 function etchDefault(){
     document.querySelectorAll('.etch').forEach((item) => {
+        removeMouseover(item);
         item.addEventListener('mouseover', etch)
     })
+};
+
+// gray scale btn
+
+let grayScaleBtn = document.getElementById('gray-scale');
+
+grayScaleBtn.addEventListener('click', grayScale);
+
+function grayScale(){
+    document.querySelectorAll('.etch').forEach((item) => {
+    removeMouseover(item);
+    let opacity = 0;
+    function setOpacity(){
+        opacity += 0.1;
+        this.style.backgroundColor = `rgba(0,0,0,${opacity})`
+        console.log(opacity);
+    }
+    item.addEventListener('mouseover', setOpacity)
+})
 };
 
 // randomized color button
@@ -71,9 +91,18 @@ let randomBtn = document.getElementById('random-color');
 randomBtn.addEventListener('click',etchRand);
 function etchRand(){
     document.querySelectorAll('.etch').forEach((item) => {
+        removeMouseover(item);
         item.addEventListener('mouseover', randomColors)
     })
 };
+
+// remove all mouseover functions
+
+function removeMouseover(item){
+    item.removeEventListener('mouseover', etch)
+    item.removeEventListener('mouseover', etchRand)
+    item.removeEventListener('mouseover', grayScale)
+}
 
 makeBoard();
 
