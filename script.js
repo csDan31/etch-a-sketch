@@ -1,19 +1,5 @@
 // creates the board and squares
 
-/*
-let board = document.querySelector('.board');
-board.style.gridTemplateColumns = "repeat(16, 1fr)";
-board.style.gridTemplateRows = "repeat(16, 1fr)";
-
-for(let i = 0; i<256 ; i++) {
-    let square = document.createElement('div');
-    board.insertAdjacentElement("beforeend",square);
-    square.style.border = 'solid';
-    square.style.borderWidth = 'thin';
-} 
-*/
-
-
 let grid = 16;
 function makeBoard() {
     let board = document.querySelector('.board');
@@ -68,6 +54,7 @@ function grayScale(){
     document.querySelectorAll('.etch').forEach((item) => {
     removeMouseover(item);
     let opacity = 0;
+    
     function setOpacity(){
         opacity += 0.1;
         this.style.backgroundColor = `rgba(0,0,0,${opacity})`
@@ -77,21 +64,18 @@ function grayScale(){
 })
 };
 
-// randomized color button
-
-function randomColors(){
-    let red = Math.floor(Math.random()*256);
-    let blue = Math.floor(Math.random()*256);
-    let green = Math.floor(Math.random()*256);
-    this.style.backgroundColor = `rgb(${red},${blue},${green})`;
-}
-
 let randomBtn = document.getElementById('random-color');
 
 randomBtn.addEventListener('click',etchRand);
 function etchRand(){
     document.querySelectorAll('.etch').forEach((item) => {
         removeMouseover(item);
+        function randomColors(){
+            let red = Math.floor(Math.random()*256);
+            let blue = Math.floor(Math.random()*256);
+            let green = Math.floor(Math.random()*256);
+            this.style.backgroundColor = `rgb(${red},${blue},${green})`;
+        }
         item.addEventListener('mouseover', randomColors)
     })
 };
@@ -129,6 +113,5 @@ resetBtn.addEventListener('click', resetGrid);
 
 function resetGrid(){
     document.querySelectorAll('.etch').forEach((item) => {
-        item.style.backgroundColor = 'white';
+        item.style.backgroundColor = `rgba(255,255,255,0)`
 })};
-
